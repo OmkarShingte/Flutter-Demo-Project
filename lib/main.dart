@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,142 +11,46 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SplashScreen(), //const MyHomePage(title: 'Flutter Home Page'),
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: DataList()
+        // home: NetworkCall()
+        // home: const Operations(title: 'Flutter Home Page'),
+        // home: SplashScreen(),
+        );
+  }
+}
+
+class DataListItem extends StatefulWidget{
+  @override
+  State<DataListItem> createState() => _DataListItemState();
+}
+
+class _DataListItemState extends State<DataListItem> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var n1Con = TextEditingController();
-  var n2Con = TextEditingController();
-  var result = 0;
-  var n2 = 0;
-  var n1 = 0;
-
+class DataList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
-        title: Text(widget.title),
-      ),
+          backgroundColor: Colors.blue.shade400,
+          title: Center(child: Text("Data List"))),
       body: Container(
-        color: Colors.grey.shade100,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: n1Con,
-                  keyboardType: TextInputType.number,
-                ),
-                TextField(
-                  controller: n2Con,
-                  keyboardType: TextInputType.number,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            n1 = int.parse(n1Con.text.toString());
-                            n2 = int.parse(n2Con.text.toString());
-                            setState(() {
-                              result = n1 + n2;
-                            });
-                          },
-                          child: Text("Add")),
-                      ElevatedButton(
-                          onPressed: () {
-                            n1 = int.parse(n1Con.text.toString());
-                            n2 = int.parse(n2Con.text.toString());
-                            setState(() {
-                              result = n1 - n2;
-                            });
-                          },
-                          child: Text("Sub")),
-                      ElevatedButton(
-                          onPressed: () {
-                            n1 = int.parse(n1Con.text.toString());
-                            n2 = int.parse(n2Con.text.toString());
-                            setState(() {
-                              result = n1 * n2;
-                            });
-                          },
-                          child: Text("Mul")),
-                      ElevatedButton(
-                          onPressed: () {
-                            n1 = int.parse(n1Con.text.toString());
-                            n2 = int.parse(n2Con.text.toString());
-                            setState(() {
-                              result = n1 ~/ n2;
-                            });
-                          },
-                          child: Text("Div")),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(21),
-                  child: Text(
-                    "Result : $result",
-                    style: TextStyle(fontSize: 25, color: Colors.black),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.grey,
-        child: Center(
-          child: Text(
-            "Sample",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-          ),
-        ),
+        color: Colors.blue.shade50,
+        child: DataListItem(),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => MyHomePage(title: "Flutter Home Page"),));
-    });
   }
 }
