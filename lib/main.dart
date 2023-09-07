@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Home Page'),
+      home: SplashScreen(), //const MyHomePage(title: 'Flutter Home Page'),
     );
   }
 }
@@ -42,11 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade300,
+        backgroundColor: Colors.grey.shade300,
         title: Text(widget.title),
       ),
       body: Container(
-        color: Colors.blue.shade100,
+        color: Colors.grey.shade100,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -71,31 +73,37 @@ class _MyHomePageState extends State<MyHomePage> {
                             n1 = int.parse(n1Con.text.toString());
                             n2 = int.parse(n2Con.text.toString());
                             setState(() {
-                              result = n1+n2;
+                              result = n1 + n2;
                             });
                           },
                           child: Text("Add")),
-                      ElevatedButton(onPressed: () {
-                        n1 = int.parse(n1Con.text.toString());
-                        n2 = int.parse(n2Con.text.toString());
-                        setState(() {
-                          result = n1-n2;
-                        });
-                      }, child: Text("Sub")),
-                      ElevatedButton(onPressed: () {
-                        n1 = int.parse(n1Con.text.toString());
-                        n2 = int.parse(n2Con.text.toString());
-                        setState(() {
-                          result = n1*n2;
-                        });
-                      }, child: Text("Mul")),
-                      ElevatedButton(onPressed: () {
-                        n1 = int.parse(n1Con.text.toString());
-                        n2 = int.parse(n2Con.text.toString());
-                        setState(() {
-                          result = n1~/n2;
-                        });
-                      }, child: Text("Div")),
+                      ElevatedButton(
+                          onPressed: () {
+                            n1 = int.parse(n1Con.text.toString());
+                            n2 = int.parse(n2Con.text.toString());
+                            setState(() {
+                              result = n1 - n2;
+                            });
+                          },
+                          child: Text("Sub")),
+                      ElevatedButton(
+                          onPressed: () {
+                            n1 = int.parse(n1Con.text.toString());
+                            n2 = int.parse(n2Con.text.toString());
+                            setState(() {
+                              result = n1 * n2;
+                            });
+                          },
+                          child: Text("Mul")),
+                      ElevatedButton(
+                          onPressed: () {
+                            n1 = int.parse(n1Con.text.toString());
+                            n2 = int.parse(n2Con.text.toString());
+                            setState(() {
+                              result = n1 ~/ n2;
+                            });
+                          },
+                          child: Text("Div")),
                     ],
                   ),
                 ),
@@ -112,5 +120,35 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        color: Colors.grey,
+        child: Center(
+          child: Text(
+            "Sample",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    Timer(Duration(seconds: 2), () {
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) => MyHomePage(title: "Flutter Home Page"),));
+    });
   }
 }
