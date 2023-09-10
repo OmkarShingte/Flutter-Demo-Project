@@ -1,6 +1,11 @@
-# first
+# Flutter Demo Projects
 
-A new Flutter project.
+A new Flutter project with different components used to understand basics concepts.
+This includes -
+1. Splash screen
+2. Api call
+3. Integration of api with ui
+4. Navigating through different screens
 
 ## Getting Started
 
