@@ -6,7 +6,7 @@ class Operations extends StatefulWidget {
   final String title;
 
   @override
-  State<Operations> createState() => _OperationsState(title);
+  State<Operations> createState() => _OperationsState();
 }
 
 class _OperationsState extends State<Operations> {
@@ -17,7 +17,7 @@ class _OperationsState extends State<Operations> {
   var n1 = 0;
   var title = "";
 
-  _OperationsState(this.title);
+  _OperationsState();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _OperationsState extends State<Operations> {
         backgroundColor: Colors.grey.shade300,
         title: Center(
             child: Text(widget.title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
       ),
       body: Container(
         color: Colors.grey.shade200,
@@ -57,7 +57,7 @@ class _OperationsState extends State<Operations> {
                               result = n1 + n2;
                             });
                           },
-                          child: Text("Add")),
+                          child: const Text("Add")),
                       ElevatedButton(
                           onPressed: () {
                             n1 = int.parse(n1Con.text.toString());
@@ -66,7 +66,7 @@ class _OperationsState extends State<Operations> {
                               result = n1 - n2;
                             });
                           },
-                          child: Text("Sub")),
+                          child: const Text("Sub")),
                       ElevatedButton(
                           onPressed: () {
                             n1 = int.parse(n1Con.text.toString());
@@ -75,7 +75,7 @@ class _OperationsState extends State<Operations> {
                               result = n1 * n2;
                             });
                           },
-                          child: Text("Mul")),
+                          child: const Text("Mul")),
                       ElevatedButton(
                           onPressed: () {
                             n1 = int.parse(n1Con.text.toString());
@@ -84,15 +84,15 @@ class _OperationsState extends State<Operations> {
                               result = n1 ~/ n2;
                             });
                           },
-                          child: Text("Div")),
+                          child: const Text("Div")),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(21),
+                  padding: const EdgeInsets.all(21),
                   child: Text(
                     "Result : $result",
-                    style: TextStyle(fontSize: 25, color: Colors.black),
+                    style: const TextStyle(fontSize: 25, color: Colors.black),
                   ),
                 )
               ],

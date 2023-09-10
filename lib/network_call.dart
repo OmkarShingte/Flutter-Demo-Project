@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'models/Album.dart';
+import 'models/album.dart';
 
 class NetworkCall extends StatefulWidget {
   const NetworkCall({super.key});
@@ -30,6 +30,7 @@ class _NetworkCall extends State<NetworkCall> {
 
   @override
   void initState() {
+    super.initState();
     futureAlbum = fetchAlbum();
   }
 
@@ -38,22 +39,20 @@ class _NetworkCall extends State<NetworkCall> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
-        title: Center(
+        title: const Center(
             child: Text("widget.title",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
       ),
-      body: Container(
-        child: FutureBuilder<Album>(
-          future: futureAlbum,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data!.title);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-            return const CircularProgressIndicator();
-          },
-        ),
+      body: FutureBuilder<Album>(
+        future: futureAlbum,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(snapshot.data!.title);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const CircularProgressIndicator();
+        },
       ),
     );
   }

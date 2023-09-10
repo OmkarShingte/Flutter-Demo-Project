@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'Operations.dart';
-import 'main.dart';
+import 'operations.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         color: Colors.grey,
-        child: Center(
+        child: const Center(
           child: Text(
             "Sample",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
@@ -29,12 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 2), () {
+    super.initState();
+    Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
           //goRoute
           context,
           MaterialPageRoute(
-            builder: (context) => Operations(title: "Landing"),
+            builder: (context) => const Operations(title: "Landing"),
           ));
     });
   }

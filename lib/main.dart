@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'package:first/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'Operations.dart';
 import 'models/Data.dart';
 import 'package:http/http.dart' as http;
+import 'network_call.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -20,71 +24,11 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // home: SampleUI()
-        home: DataList()
-        // home: NetworkCall()
+        home: const DataList()
+        // home: const NetworkCall()
         // home: const Operations(title: 'Flutter Home Page'),
-        // home: SplashScreen(),
+        // home: const SplashScreen(),
         );
-  }
-}
-
-class SampleUI extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Sample UI"),
-        backgroundColor: Colors.grey.shade300,
-      ),
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // First LinearLayout
-            Container(
-              margin: EdgeInsets.all(8.0),
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("TextView"),
-                      ),
-                      Expanded(
-                        child: Text("TextView"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("TextView"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("TextView"),
-                      ),
-                      Expanded(
-                        child: Text("TextView"),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -110,6 +54,7 @@ class _DataListItemState extends State<DataListItem> {
 
   @override
   void initState() {
+    super.initState();
     // fetchData();
     dataArray = fetchData();
   }
@@ -150,7 +95,8 @@ class _DataListItemState extends State<DataListItem> {
                               children: [
                                 Text(
                                   "${item.name!.first!} ${item.name!.last!}",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 12.0),
@@ -184,10 +130,9 @@ class _DataListItemState extends State<DataListItem> {
                 const Divider(),
           );
         } else {
-          print("snapshot.error   ${snapshot.error} ");
           return Text('${snapshot.error}');
         }
-        return const CircularProgressIndicator();
+        // return const CircularProgressIndicator();
       },
     );
   }
@@ -201,10 +146,10 @@ class DataList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.blue.shade400,
-          title: Center(child: Text("Data List"))),
+          title: const Center(child: Text("Data List"))),
       body: Container(
         color: Colors.blue.shade50,
-        child: DataListItem(),
+        child: const DataListItem(),
       ),
     );
   }
