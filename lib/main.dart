@@ -1,4 +1,5 @@
 import 'package:first/provider/counter_model.dart';
+import 'package:first/provider/netwotk_call_model.dart';
 import 'package:first/splash_screen.dart';
 import 'package:first/login.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +8,12 @@ import 'counter_with_provider_screen.dart';
 import 'data_list.dart';
 import 'models/Data.dart';
 import 'network_call.dart';
+import 'network_call_provider.dart';
 import 'operations.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (context) => CounterModel(),
+    create: (context) => NetworkCallModel(),
     child: const MyApp(),
   ));
 }
@@ -32,8 +34,9 @@ class MyApp extends StatelessWidget {
       // home: const CounterWithProviderScreen(),
       // home: const LoginScreen()
       // home: const DataList()
+      home: const NetworkCallProvider()
       // home: const NetworkCall()
-      home: const Operations(title: 'Flutter Home Page'),
+      // home: const Operations(title: 'Flutter Home Page'),
       // home: const SplashScreen(),
     );
   }
