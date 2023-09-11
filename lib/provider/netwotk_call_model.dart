@@ -8,7 +8,6 @@ class NetworkCallModel extends ChangeNotifier {
   Album? get album => _album;
   set album(Album? value) {
     _album = value;
-    notifyListeners();
   }
 
   Future<void> getAllTodos() async {
