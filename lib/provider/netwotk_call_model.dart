@@ -5,12 +5,15 @@ import '../models/album.dart';
 
 class NetworkCallModel extends ChangeNotifier {
   Album? _album;
-
   Album? get album => _album;
+  set album(Album? value) {
+    _album = value;
+    notifyListeners();
+  }
 
   Future<void> getAllTodos() async {
     final response = await NetworkCallApi().getData();
-    print("response = ${response}");
+    print("response = $response");
     _album = response!;
     notifyListeners();
   }

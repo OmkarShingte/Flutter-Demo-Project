@@ -14,27 +14,39 @@ class NetworkCallProvider extends StatefulWidget {
 }
 
 class _NetworkCallProvider extends State<NetworkCallProvider> {
+  late NetworkCallModel networkCallModel;
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<NetworkCallModel>(context, listen: false).getAllTodos();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Provider.of<NetworkCallModel>(context, listen: false).getAllTodos();
+    // });
+    networkCallModel = NetworkCallModel();
+    networkCallModel = Provider.of<NetworkCallModel>(context, listen: false);
+    networkCallModel.getAllTodos();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NetworkCallModel>(
-      builder: (context, value, child) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade300,
-          title: const Center(
-              child: Text("widget.title",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
-        ),
-        body: Center(
-          child: Text("${value.album!.title} ${value.album!.title}"),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade300,
+        title: const Center(
+            child: Text(
+              "widget.title",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            )),
+      ),
+      body: Consumer<NetworkCallModel>(
+        builder: (context, value, child) {
+          if (value.album == null) {
+            return Center(child: Text("No data found"));
+          } else {
+            return Center(
+              child: Text("${value.album!.title} ${value.album!.title}"),
+            );
+          }
+        },
       ),
     );
   }
