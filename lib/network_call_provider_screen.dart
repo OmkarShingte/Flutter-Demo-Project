@@ -1,10 +1,6 @@
-import 'dart:convert';
-import 'dart:async';
-import 'package:first/provider/netwotk_call_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:first/provider/network_call_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/album.dart';
 
 class NetworkCallProvider extends StatefulWidget {
   const NetworkCallProvider({super.key});
@@ -18,9 +14,6 @@ class _NetworkCallProvider extends State<NetworkCallProvider> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   Provider.of<NetworkCallModel>(context, listen: false).getAllTodos();
-    // });
     networkCallModel = NetworkCallModel();
     networkCallModel = Provider.of<NetworkCallModel>(context, listen: false);
     networkCallModel.getAllTodos();
@@ -40,7 +33,7 @@ class _NetworkCallProvider extends State<NetworkCallProvider> {
       body: Consumer<NetworkCallModel>(
         builder: (context, value, child) {
           if (value.album == null) {
-            return Center(child: Text("No data found"));
+            return const Center(child: Text("No data found"));
           } else {
             return Center(
               child: Text("${value.album!.title} ${value.album!.title}"),

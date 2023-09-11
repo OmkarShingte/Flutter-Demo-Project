@@ -1,11 +1,12 @@
-import 'package:first/repository/network_call_api.dart';
+import 'package:first/repository/network_call_repo.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../models/album.dart';
+import '../models/album_model.dart';
 
 class NetworkCallModel extends ChangeNotifier {
   Album? _album;
+
   Album? get album => _album;
+
   set album(Album? value) {
     _album = value;
   }

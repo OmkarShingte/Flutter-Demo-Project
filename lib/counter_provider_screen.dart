@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:first/provider/counter_model.dart';
+import 'package:first/provider/counter_provider.dart';
 
 class CounterWithProviderScreen extends StatefulWidget {
   const CounterWithProviderScreen({super.key});

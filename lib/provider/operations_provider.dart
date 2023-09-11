@@ -1,4 +1,4 @@
-import 'package:first/provider/counter_model.dart';
+import 'package:first/provider/counter_provider.dart';
 import 'package:flutter/material.dart';
 
 class OperationsModel extends ChangeNotifier {
@@ -10,5 +10,4 @@ class OperationsModel extends ChangeNotifier {
 
   int divide(int a, int b) => a ~/ b;
 
-  notifyListeners();
 }

@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
-import '../models/album.dart';
+import '../models/album_model.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkCallApi {
@@ -12,7 +11,6 @@ class NetworkCallApi {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
-      print("jsonDecode(response.body) = ${jsonDecode(response.body)}");
       return Album.fromJson(jsonDecode(response.body));
     }
     return null;
