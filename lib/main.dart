@@ -1,4 +1,4 @@
-import 'package:first/counter_model.dart';
+import 'package:first/provider/counter_model.dart';
 import 'package:first/splash_screen.dart';
 import 'package:first/login.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CounterWithProviderScreen(),
+      // home: const CounterWithProviderScreen(),
       // home: const LoginScreen()
       // home: const DataList()
       // home: const NetworkCall()
-      // home: const Operations(title: 'Flutter Home Page'),
+      home: const Operations(title: 'Flutter Home Page'),
       // home: const SplashScreen(),
     );
   }
