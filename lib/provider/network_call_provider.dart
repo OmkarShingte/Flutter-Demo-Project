@@ -1,5 +1,5 @@
-import 'package:first/repository/network_call_repo.dart';
 import 'package:flutter/cupertino.dart';
+import '../api_service/network_call_service.dart';
 import '../models/album_model.dart';
 
 class NetworkCallModel extends ChangeNotifier {
@@ -11,8 +11,8 @@ class NetworkCallModel extends ChangeNotifier {
     _album = value;
   }
 
-  Future<void> getAllTodos() async {
-    final response = await NetworkCallApi().getData();
+  Future<void> getAlbum() async {
+    final response = await NetworkCallService().getAlbum();
     print("response = $response");
     _album = response!;
     notifyListeners();

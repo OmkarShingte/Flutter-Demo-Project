@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'models/data_model.dart';
+import '../models/data_model.dart';
 import 'package:http/http.dart' as http;
 
 class DataList extends StatelessWidget {

@@ -1,13 +1,11 @@
 import 'dart:convert';
+import 'package:first/api_constants/api_constants.dart';
 import '../models/album_model.dart';
 import 'package:http/http.dart' as http;
 
-class NetworkCallApi {
-  static String baseUrl = 'https://jsonplaceholder.typicode.com';
-  static String usersEndpoint = '/users';
-
-  Future<Album?> getData() async {
-    const url = 'https://jsonplaceholder.typicode.com/albums/1';
+class NetworkCallService {
+  Future<Album?> getAlbum() async {
+    const url = ApiConstants.getAlbum;
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {

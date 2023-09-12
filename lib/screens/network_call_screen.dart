@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'models/album_model.dart';
+import '../models/album_model.dart';
 
 class NetworkCall extends StatefulWidget {
   const NetworkCall({super.key});

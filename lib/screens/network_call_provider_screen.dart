@@ -16,7 +16,7 @@ class _NetworkCallProvider extends State<NetworkCallProvider> {
     super.initState();
     networkCallModel = NetworkCallModel();
     networkCallModel = Provider.of<NetworkCallModel>(context, listen: false);
-    networkCallModel.getAllTodos();
+    networkCallModel.getAlbum();
   }
 
   @override

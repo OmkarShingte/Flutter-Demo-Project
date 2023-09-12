@@ -4,7 +4,11 @@ import 'package:first/provider/counter_provider.dart';
 
 class CounterWithProviderScreen extends StatefulWidget {
   const CounterWithProviderScreen({super.key});
-
+//  multi provider
+//  get it - DI
+//  locator
+//   singleton class
+//  media query
   @override
   State<CounterWithProviderScreen> createState() =>
       _CounterWithProviderScreenState();

@@ -1,19 +1,19 @@
 import 'package:first/provider/counter_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
-import 'package:first/splash_screen.dart';
-import 'package:first/login_screen.dart';
+import 'package:first/screens/splash_screen.dart';
+import 'package:first/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'counter_provider_screen.dart';
-import 'data_list_screen.dart';
+import 'screens/counter_provider_screen.dart';
+import 'screens/data_list_screen.dart';
 import 'models/data_model.dart';
-import 'network_call_screen.dart';
-import 'network_call_provider_screen.dart';
-import 'operations_screen.dart';
+import 'screens/network_call_screen.dart';
+import 'screens/network_call_provider_screen.dart';
+import 'screens/operations_screen.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (context) => NetworkCallModel(),
+    create: (context) => CounterModel(),
     child: const MyApp(),
   ));
 }
@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const CounterWithProviderScreen(),
+      home: const CounterWithProviderScreen(),
       // home: const LoginScreen()
       // home: const DataList()
-      home: const NetworkCallProvider()
+      // home: const NetworkCallProvider()
       // home: const NetworkCall()
       // home: const Operations(title: 'Flutter Home Page'),
       // home: const SplashScreen(),
