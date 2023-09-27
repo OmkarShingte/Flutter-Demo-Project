@@ -1,3 +1,4 @@
+import 'package:first/common/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:first/provider/counter_provider.dart';
@@ -31,7 +32,8 @@ class _CounterWithProviderScreenState extends State<CounterWithProviderScreen> {
               Text(
                 "${value.count}",
                 style: Theme.of(context).textTheme.headlineMedium,
-              )
+              ),
+              CustomButton()
             ],
           ),
         ),
