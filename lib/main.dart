@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/counter_provider_screen.dart';
 import 'screens/data_list_screen.dart';
-import 'models/data_model.dart';
 import 'screens/network_call_screen.dart';
 import 'screens/network_call_provider_screen.dart';
 import 'screens/operations_screen.dart';
@@ -18,7 +17,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,104 +36,136 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Homepage"))),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            flex: 0,
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      //goRoute
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                            create: (context) => NetworkCallModel(),
-                            child: const NetworkCallProvider()),
-                      ));
-                },
-                child: Text(
-                  "Network Call",
-                  style: CustomTextStyle(),
-                )),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChangeNotifierProvider(
-                          create: (context) => CounterModel(),
-                          child: const CounterWithProviderScreen()),
-                    ));
-              },
-              child: Text(
-                "Counter with provider",
-                style: CustomTextStyle(),
-              ),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(Colors.lightBlueAccent),
-              )),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ));
-              },
-              child: Text("Login screen NM")),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DataList(),
-                    ));
-              },
-              child: Text("Data List")),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SplashScreen(),
-                    ));
-              },
-              child: Text("Splach Screen")),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const Operations(title: 'Flutter Home Page'),
-                    ));
-              },
-              child: Text("Operations")),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    //goRoute
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NetworkCall(),
-                    ));
-              },
-              child: Text("Simple Network call")),
-        ],
+      appBar: AppBar(backgroundColor: Colors.lightBlueAccent.shade100,title: const Center(child: Text("Homepage", style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),))),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                              create: (context) => NetworkCallModel(),
+                              child: const NetworkCallProvider()),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text(
+                    "Network Call",
+                    style: customTextStyle(),
+                  )),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                              create: (context) => CounterModel(),
+                              child: const CounterWithProviderScreen()),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text(
+                    "Counter with provider",
+                    style: customTextStyle(),
+                  )),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text("Login screen NM", style: customTextStyle())),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DataList(),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text("Data List", style: customTextStyle())),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SplashScreen(),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text("Splash Screen", style: customTextStyle())),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const Operations(title: 'Flutter Home Page'),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text("Operations", style: customTextStyle())),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NetworkCall(),
+                        ));
+                  },
+                  style: customButtonStyle(),
+                  child: Text(
+                    "Simple Network call",
+                    style: customTextStyle(),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  CustomTextStyle() {
-    return TextStyle(color: Colors.black, fontSize: 15);
+  ButtonStyle customButtonStyle() {
+    return ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
+    );
+  }
+
+  customTextStyle() {
+    return const TextStyle(color: Colors.black, fontSize: 16);
   }
 }
