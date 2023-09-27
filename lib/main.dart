@@ -1,5 +1,7 @@
 import 'package:first/provider/counter_provider.dart';
+import 'package:first/provider/looking_for_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
+import 'package:first/screens/looking_for_screen.dart';
 import 'package:first/screens/splash_screen.dart';
 import 'package:first/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,14 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.lightBlueAccent.shade100,title: const Center(child: Text("Homepage", style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),))),
+      appBar: AppBar(
+          backgroundColor: Colors.lightBlueAccent.shade100,
+          title: const Center(
+              child: Text(
+            "Homepage",
+            style: TextStyle(
+                color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+          ))),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,6 +159,25 @@ class MainScreen extends StatelessWidget {
                   style: customButtonStyle(),
                   child: Text(
                     "Simple Network call",
+                    style: customTextStyle(),
+                  )),
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        //goRoute
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => LookingForProvider(),
+                                  child: LookingForScreen(),
+                                )));
+                  },
+                  style: customButtonStyle(),
+                  child: Text(
+                    "Looking for Numbers",
                     style: customTextStyle(),
                   )),
             ),

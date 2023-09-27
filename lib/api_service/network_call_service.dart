@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:first/api_constants/api_constants.dart';
+import 'package:first/models/number_model.dart';
 import '../models/album_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +23,13 @@ class NetworkCallService {
       return Album.fromJson(jsonDecode(response.body));
     }
     return null;
+  }
+
+  Future<Numbers> getList(String page) async {
+    final uri = Uri.parse(ApiConstants.getNumbers);
+    final res = await http.get(uri);
+    print("response----> $res");
+    return Numbers.fromJson(jsonDecode(res.body));
   }
 
 // Future<Album> getUsers() async {
