@@ -12,8 +12,9 @@ class LookingForScreen extends StatefulWidget {
 }
 
 class _LookingForScreenState extends State<LookingForScreen> {
+  int count = 0;
   late LookingForProvider lookingForProvider;
-
+  bool selected = false;
   @override
   void initState() {
     super.initState();
@@ -30,10 +31,8 @@ class _LookingForScreenState extends State<LookingForScreen> {
         appBar: AppBar(
           title: const Text("Peoples Looking For"),
         ),
-        body: Container(
-          color: Colors.grey.shade50,
-          height: 130,
-          child: Card(
+        body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Card(
             elevation: 4,
             color: Colors.white,
             child: Padding(
@@ -75,14 +74,18 @@ class _LookingForScreenState extends State<LookingForScreen> {
                                 Container(
                                   margin: const EdgeInsets.only(left: 10),
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          selected = !selected;
+                                        });
+                                      },
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
                                                 Colors.grey.shade900),
                                       ),
                                       child: const Text(
-                                        "Contains",
+                                        "Containsa",
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 14),
                                       )),
@@ -96,7 +99,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
                   ),
                   const Divider(
                       color: Colors.black38, height: 16, thickness: 2),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -116,7 +119,95 @@ class _LookingForScreenState extends State<LookingForScreen> {
               ),
             ),
           ),
-        ),
+          Container(
+            height: 100,
+            child: Card(
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 10.0,
+                    top: 10.0,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            count++;
+                            if (count > 3) count = 0;
+                            print("count = $count");
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.grey.shade900),
+                        ),
+                        child: const Text(
+                          "Contains",
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        )),
+                  ),
+                  Positioned(
+                    top: 24,
+                    right: 120,
+                    child: RatingBar.builder(
+                      itemSize: 20,
+                      glow: true,
+                      initialRating: 2.5,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      // itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                  ),
+                  // AnimatedAlign(
+                  //   alignment: Alignment.centerLeft,
+                  //   duration: Duration(seconds: 1),
+                  //   curve: Curves.fastOutSlowIn,
+                  //   child: Text("Fixed"),
+                  // ),
+                  AnimatedAlign(
+                    duration: Duration(seconds: 1),
+                    alignment: selected ? Alignment.center : Alignment.centerLeft,
+                    curve: Curves.fastOutSlowIn,
+                    child: const Text(
+                      "776677",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                  ),
+                  Positioned(
+                    left: 10,
+                    child: Divider(
+                        color: Colors.black38, height: 16, thickness: 2),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          IndexedStack(
+            index: count,
+            children: [
+              Container(
+                height: 150,
+                color: Colors.green,
+              ),
+              Container(
+                height: 100,
+                color: Colors.blue,
+              ),
+              Container(
+                height: 50,
+                color: Colors.red,
+              ),
+            ],
+          )
+        ]),
       ),
     );
   }
