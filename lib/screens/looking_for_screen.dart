@@ -99,7 +99,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
                   ),
                   const Divider(
                       color: Colors.black38, height: 16, thickness: 2),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -119,7 +119,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: Card(
               child: Stack(
@@ -172,7 +172,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
                   //   child: Text("Fixed"),
                   // ),
                   AnimatedAlign(
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     alignment: selected ? Alignment.center : Alignment.centerLeft,
                     curve: Curves.fastOutSlowIn,
                     child: const Text(
@@ -181,7 +181,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
                           fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     left: 10,
                     child: Divider(
                         color: Colors.black38, height: 16, thickness: 2),
