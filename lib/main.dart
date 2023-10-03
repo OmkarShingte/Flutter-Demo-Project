@@ -9,7 +9,6 @@ import 'package:first/screens/splash_screen.dart';
 import 'package:first/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/item.dart';
 import 'screens/counter_provider_screen.dart';
 import 'screens/data_list_screen.dart';
 import 'screens/network_call_screen.dart';
@@ -45,7 +44,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentPageIndex = 0;
-  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -141,7 +139,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         appBar: AppBar(
             backgroundColor: Colors.lightBlueAccent.shade100,
-            title: Text(
+            title: const Text(
               "Homepage",
               style: TextStyle(
                   color: Colors.black,
@@ -173,7 +171,7 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -193,7 +191,7 @@ class _MainScreenState extends State<MainScreen> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -206,7 +204,7 @@ class _MainScreenState extends State<MainScreen> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -221,7 +219,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Text("Login screen NM", style: customTextStyle())),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -236,7 +234,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Text("Data List", style: customTextStyle())),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -251,7 +249,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Text("Splash Screen", style: customTextStyle())),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -267,7 +265,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Text("Operations", style: customTextStyle())),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -285,7 +283,7 @@ class _MainScreenState extends State<MainScreen> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                       onPressed: () {
@@ -305,7 +303,7 @@ class _MainScreenState extends State<MainScreen> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                     onPressed: () {
@@ -323,7 +321,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                     onPressed: () {
@@ -341,13 +339,14 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FutureBuilderExample(),)),
+                          builder: (context) => const FutureBuilderExample(),
+                        )),
                     child: Text(
                       " Future Builder Example",
                       style: customTextStyle(),
@@ -372,8 +371,6 @@ class _MainScreenState extends State<MainScreen> {
               child: const CounterWithProviderScreen()),
         ));
   }
-
-  static const List<Widget> homeOptions = <Widget>[];
 
   ButtonStyle customButtonStyle() {
     return ButtonStyle(

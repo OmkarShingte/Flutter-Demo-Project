@@ -26,7 +26,8 @@ class _OperationsState extends State<Operations> {
         backgroundColor: Colors.grey.shade300,
         title: Center(
             child: Text(widget.title,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 24))),
       ),
       body: Container(
         color: Colors.grey.shade200,

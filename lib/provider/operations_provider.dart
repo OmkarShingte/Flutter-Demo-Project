@@ -9,5 +9,4 @@ class OperationsModel extends ChangeNotifier {
   int multiply(int a, int b) => a * b;
 
   int divide(int a, int b) => a ~/ b;
-
 }

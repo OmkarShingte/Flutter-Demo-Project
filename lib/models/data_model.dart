@@ -57,15 +57,13 @@ class Results {
   Results.fromJson(Map<String, dynamic> json) {
     gender = json['gender'];
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    location = json['location'] != null
-        ? Location.fromJson(json['location'])
-        : null;
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     email = json['email'];
     login = json['login'] != null ? Login.fromJson(json['login']) : null;
     dob = json['dob'] != null ? Dob.fromJson(json['dob']) : null;
-    registered = json['registered'] != null
-        ? Dob.fromJson(json['registered'])
-        : null;
+    registered =
+        json['registered'] != null ? Dob.fromJson(json['registered']) : null;
     phone = json['phone'];
     cell = json['cell'];
     id = json['id'] != null ? Id.fromJson(json['id']) : null;
@@ -133,6 +131,7 @@ class Location {
   String? city;
   String? state;
   String? country;
+
   // int? postcode;
   Coordinates? coordinates;
   Timezone? timezone;
@@ -147,8 +146,7 @@ class Location {
       this.timezone});
 
   Location.fromJson(Map<String, dynamic> json) {
-    street =
-        json['street'] != null ? Street.fromJson(json['street']) : null;
+    street = json['street'] != null ? Street.fromJson(json['street']) : null;
     city = json['city'];
     state = json['state'];
     country = json['country'];
@@ -156,9 +154,8 @@ class Location {
     coordinates = json['coordinates'] != null
         ? Coordinates.fromJson(json['coordinates'])
         : null;
-    timezone = json['timezone'] != null
-        ? Timezone.fromJson(json['timezone'])
-        : null;
+    timezone =
+        json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
   }
 
   Map<String, dynamic> toJson() {

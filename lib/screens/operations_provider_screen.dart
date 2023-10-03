@@ -27,78 +27,79 @@ class _OperationsProviderState extends State<OperationsProvider> {
       builder: (context, value, child) {
         final operationModel = context.read<OperationsModel>();
         return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade300,
-          title: Center(
-              child: Text(widget.title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 24))),
-        ),
-        body: Container(
-          color: Colors.grey.shade200,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextField(
-                    controller: n1Con,
-                    keyboardType: TextInputType.number,
-                  ),
-                  TextField(
-                    controller: n2Con,
-                    keyboardType: TextInputType.number,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              n1 = int.parse(n1Con.text.toString());
-                              n2 = int.parse(n2Con.text.toString());
-                              operationModel.add(n1, n2);
-                            },
-                            child: const Text("Add")),
-                        ElevatedButton(
-                            onPressed: () {
-                              n1 = int.parse(n1Con.text.toString());
-                              n2 = int.parse(n2Con.text.toString());
-                              operationModel.sub(n1, n2);
-                            },
-                            child: const Text("Sub")),
-                        ElevatedButton(
-                            onPressed: () {
-                              n1 = int.parse(n1Con.text.toString());
-                              n2 = int.parse(n2Con.text.toString());
-                              operationModel.multiply(n1, n2);
-                            },
-                            child: const Text("Mul")),
-                        ElevatedButton(
-                            onPressed: () {
-                              n1 = int.parse(n1Con.text.toString());
-                              n2 = int.parse(n2Con.text.toString());
-                              operationModel.divide(n1, n2);
-                            },
-                            child: const Text("Div")),
-                      ],
+          appBar: AppBar(
+            backgroundColor: Colors.grey.shade300,
+            title: Center(
+                child: Text(widget.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 24))),
+          ),
+          body: Container(
+            color: Colors.grey.shade200,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      controller: n1Con,
+                      keyboardType: TextInputType.number,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(21),
-                    child: Text(
-                      "Result : $result",
-                      style: const TextStyle(fontSize: 25, color: Colors.black),
+                    TextField(
+                      controller: n2Con,
+                      keyboardType: TextInputType.number,
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                n1 = int.parse(n1Con.text.toString());
+                                n2 = int.parse(n2Con.text.toString());
+                                operationModel.add(n1, n2);
+                              },
+                              child: const Text("Add")),
+                          ElevatedButton(
+                              onPressed: () {
+                                n1 = int.parse(n1Con.text.toString());
+                                n2 = int.parse(n2Con.text.toString());
+                                operationModel.sub(n1, n2);
+                              },
+                              child: const Text("Sub")),
+                          ElevatedButton(
+                              onPressed: () {
+                                n1 = int.parse(n1Con.text.toString());
+                                n2 = int.parse(n2Con.text.toString());
+                                operationModel.multiply(n1, n2);
+                              },
+                              child: const Text("Mul")),
+                          ElevatedButton(
+                              onPressed: () {
+                                n1 = int.parse(n1Con.text.toString());
+                                n2 = int.parse(n2Con.text.toString());
+                                operationModel.divide(n1, n2);
+                              },
+                              child: const Text("Div")),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(21),
+                      child: Text(
+                        "Result : $result",
+                        style:
+                            const TextStyle(fontSize: 25, color: Colors.black),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
-      );
+          ), // This trailing comma makes auto-formatting nicer for build methods.
+        );
       },
     );
   }

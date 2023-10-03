@@ -11,6 +11,7 @@ class NetworkCallProvider extends StatefulWidget {
 
 class _NetworkCallProvider extends State<NetworkCallProvider> {
   late NetworkCallModel networkCallModel;
+
   @override
   void initState() {
     super.initState();
@@ -26,9 +27,9 @@ class _NetworkCallProvider extends State<NetworkCallProvider> {
         backgroundColor: Colors.grey.shade300,
         title: const Center(
             child: Text(
-              "widget.title",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            )),
+          "widget.title",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+        )),
       ),
       body: Consumer<NetworkCallModel>(
         builder: (context, value, child) {

@@ -1,4 +1,4 @@
-class Demo{
+class Demo {
   String? number;
   String? rating;
   String? type;
@@ -7,12 +7,11 @@ class Demo{
 
   Demo({this.number, this.rating, this.type, this.country, this.listingType});
 
-  Demo.fromJson(Map<String, dynamic> json){
+  Demo.fromJson(Map<String, dynamic> json) {
     number = "";
     rating = "";
     type = "";
     country = "";
     listingType = "";
   }
-
 }

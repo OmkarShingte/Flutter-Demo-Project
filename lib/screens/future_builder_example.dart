@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 
 /// Flutter code sample for [FutureBuilder].
@@ -14,13 +12,17 @@ class FutureBuilderExample extends StatefulWidget {
 class _FutureBuilderExampleState extends State<FutureBuilderExample> {
   final Future<String> _calculation = Future<String>.delayed(
     const Duration(seconds: 2),
-        () => 'Data Loaded',
+    () => 'Data Loaded',
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Future Builder", ),backgroundColor: Colors.lightBlueAccent),
+      appBar: AppBar(
+          title: const Text(
+            "Future Builder",
+          ),
+          backgroundColor: Colors.lightBlueAccent),
       body: DefaultTextStyle(
         style: Theme.of(context).textTheme.displayMedium!,
         textAlign: TextAlign.center,

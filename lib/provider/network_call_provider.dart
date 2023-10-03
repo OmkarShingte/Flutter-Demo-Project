@@ -17,6 +17,7 @@ class NetworkCallModel extends ChangeNotifier {
     _album = response!;
     notifyListeners();
   }
+
   Future<void> verifyLogin(String username, String password) async {
     final response = await NetworkCallService().getAlbu(username, password);
     print("response = $response");

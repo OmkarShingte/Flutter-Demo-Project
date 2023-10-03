@@ -15,6 +15,7 @@ class _LookingForScreenState extends State<LookingForScreen> {
   int count = 0;
   late LookingForProvider lookingForProvider;
   bool selected = false;
+
   @override
   void initState() {
     super.initState();
@@ -173,7 +174,8 @@ class _LookingForScreenState extends State<LookingForScreen> {
                   // ),
                   AnimatedAlign(
                     duration: const Duration(seconds: 1),
-                    alignment: selected ? Alignment.center : Alignment.centerLeft,
+                    alignment:
+                        selected ? Alignment.center : Alignment.centerLeft,
                     curve: Curves.fastOutSlowIn,
                     child: const Text(
                       "776677",
