@@ -3,5 +3,4 @@ class ApiConstants {
   static String usersEndpoint = '/users';
   static const String getAlbum =
       'https://jsonplaceholder.typicode.com/albums/1';
-;
 }

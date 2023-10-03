@@ -25,12 +25,12 @@ class NetworkCallService {
     return null;
   }
 
-  Future<Numbers> getList(String page) async {
-    final uri = Uri.parse(ApiConstants.getNumbers);
-    final res = await http.get(uri);
-    print("response----> $res");
-    return Numbers.fromJson(jsonDecode(res.body));
-  }
+  // Future<Numbers> getList(String page) async {
+  //   final uri = Uri.parse(ApiConstants.getNumbers);
+  //   final res = await http.get(uri);
+  //   print("response----> $res");
+  //   return Numbers.fromJson(jsonDecode(res.body));
+  // }
 
 // Future<Album> getUsers() async {
 //   try {
