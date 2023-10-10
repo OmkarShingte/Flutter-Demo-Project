@@ -1,0 +1,14 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class SignUpActivity extends StatefulWidget{
+  @override
+  State<SignUpActivity> createState() => _SignUpActivityState();
+}
+
+class _SignUpActivityState extends State<SignUpActivity> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.blue,);
+  }
+}

@@ -2,6 +2,7 @@
 
 A new Flutter project with different components used to understand basics concepts.
 This includes -
+
 1. Splash screen
 2. Api call
 3. Integration of api with ui

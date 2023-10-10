@@ -1,6 +1,7 @@
 import 'package:first/provider/counter_provider.dart';
 import 'package:first/provider/looking_for_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
+import 'package:first/screens/aer/screens/splash.dart';
 import 'package:first/screens/future_builder_example.dart';
 import 'package:first/screens/listtile_app.dart';
 import 'package:first/screens/looking_for_screen.dart';
@@ -151,6 +152,7 @@ class _MainScreenState extends State<MainScreen> {
           Container(
             height: 50,
             color: Colors.red,
+            child: AerApp(),
           ),
           Container(
             height: 100,
@@ -189,6 +191,21 @@ class _MainScreenState extends State<MainScreen> {
                         "Network Call",
                         style: customTextStyle(),
                       )),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AerApp(),
+                        )),
+                    child: Text(
+                      "AER App",
+                      style: customTextStyle(),
+                    ),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
@@ -348,7 +365,7 @@ class _MainScreenState extends State<MainScreen> {
                           builder: (context) => const FutureBuilderExample(),
                         )),
                     child: Text(
-                      " Future Builder Example",
+                      "Future Builder Example",
                       style: customTextStyle(),
                     ),
                   ),
