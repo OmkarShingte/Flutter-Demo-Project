@@ -1,33 +1,23 @@
 import 'package:first/screens/aer/screens/signIn_activity.dart';
 import 'package:first/screens/aer/screens/sign_up_activity.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../common/internet_connectivity.dart';
 import 'no_internet_activity.dart';
 
-//
-// class IntroductionActivity extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Colors.green,
-//     );
-//   }
-// }
-
 class IntroductionActivity extends StatelessWidget {
+  const IntroductionActivity({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             child: ViewFlipperWidget(), // Create a ViewFlipperWidget
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 10.0),
+            margin: const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 10.0),
             child: Row(
               children: [
                 Expanded(
@@ -36,16 +26,16 @@ class IntroductionActivity extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignUpActivity(),
+                            builder: (context) => const SignUpActivity(),
                           ));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFEE4B2B), // Background color
+                      backgroundColor: const Color(0xFFEE4B2B), // Background color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'SignUp',
                       style: TextStyle(
                         color: Colors.white,
@@ -55,19 +45,19 @@ class IntroductionActivity extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
                       Login(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFEE4B2B), // Background color
+                      backgroundColor: const Color(0xFFEE4B2B), // Background color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(
                         color: Colors.white,
@@ -92,19 +82,21 @@ class IntroductionActivity extends StatelessWidget {
           //goRoute
           context,
           MaterialPageRoute(
-            builder: (context) => NoInternetActivity(),
+            builder: (context) => const NoInternetActivity(),
           ));
     } else {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SignInActivity(),
+            builder: (context) => const SignInActivity(),
           ));
     }
   }
 }
 
 class ViewFlipperWidget extends StatefulWidget {
+  const ViewFlipperWidget({super.key});
+
   @override
   _ViewFlipperWidgetState createState() => _ViewFlipperWidgetState();
 }
@@ -123,7 +115,7 @@ class _ViewFlipperWidgetState extends State<ViewFlipperWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 50.0),
+      margin: const EdgeInsets.only(bottom: 50.0),
       child: Stack(
         children: [
           PageView.builder(

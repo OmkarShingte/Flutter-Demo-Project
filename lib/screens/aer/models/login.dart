@@ -18,13 +18,13 @@ class LoginUser {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['msg'] = this.msg;
-    data['message'] = this.message;
-    data['user_type'] = this.userType;
-    data['email'] = this.email;
-    data['OTP'] = this.otp;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['msg'] = msg;
+    data['message'] = message;
+    data['user_type'] = userType;
+    data['email'] = email;
+    data['OTP'] = otp;
     return data;
   }
 }

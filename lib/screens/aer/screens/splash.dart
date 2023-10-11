@@ -1,14 +1,11 @@
 import 'dart:async';
-
 import 'package:first/screens/aer/common/internet_connectivity.dart';
 import 'package:flutter/material.dart';
-
-import '../check_internet_connection/check_internet_connection.dart';
 import 'introduction_activity.dart';
 import 'no_internet_activity.dart';
 
 class AerApp extends StatefulWidget {
-  AerApp({super.key});
+  const AerApp({super.key});
 
   @override
   State<AerApp> createState() => _AerAppState();
@@ -41,14 +38,14 @@ class _AerAppState extends State<AerApp> {
             //goRoute
             context,
             MaterialPageRoute(
-              builder: (context) => NoInternetActivity(),
+              builder: (context) => const NoInternetActivity(),
             ));
       } else {
         Navigator.pushReplacement(
             //goRoute
             context,
             MaterialPageRoute(
-              builder: (context) => IntroductionActivity(),
+              builder: (context) => const IntroductionActivity(),
             ));
       }
     });

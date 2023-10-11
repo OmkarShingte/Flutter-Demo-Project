@@ -1,4 +1,5 @@
 import 'package:first/screens/aer/provider/signin_provider.dart';
+import 'package:first/screens/aer/screens/sign_up_activity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,10 +70,12 @@ class _SignInActivityState extends State<SignInActivity> {
                       flex: 2,
                       child: Switch(
                         // trackColor: MaterialStateProperty.all(Colors.white),
-                        trackOutlineColor: MaterialStateProperty.all(Colors.grey),
-                        activeColor: Color(0xFFEE4B2B),
+                        trackOutlineColor:
+                            MaterialStateProperty.all(Colors.grey),
+                        activeColor: const Color(0xFFEE4B2B),
                         // activeTrackColor: Colors.grey,
-                        value: _provider.mobileLogin, // Set the initial switch value here
+                        value: _provider.mobileLogin,
+                        // Set the initial switch value here
                         onChanged: (bool value) {
                           setState(() {
                             _provider.mobileLogin = !_provider.mobileLogin;
@@ -107,7 +110,9 @@ class _SignInActivityState extends State<SignInActivity> {
                               visible: !_provider.mobileLogin,
                               child: TextFormField(
                                 decoration: const InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFEE4B2B))),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFFEE4B2B))),
                                   hintText: 'Enter Mobile Number',
                                   labelText: 'Mobile Number',
                                   alignLabelWithHint: true,
@@ -157,8 +162,8 @@ class _SignInActivityState extends State<SignInActivity> {
                           ),
                         ),
                         child: Text(
-                           _provider.mobileLogin ? 'LOGIN' : 'SEND OTP',
-                          style: TextStyle(color: Colors.white),
+                          _provider.mobileLogin ? 'LOGIN' : 'SEND OTP',
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       const SizedBox(height: 20.0),
@@ -178,7 +183,11 @@ class _SignInActivityState extends State<SignInActivity> {
                       const SizedBox(height: 20.0),
                       GestureDetector(
                         onTap: () {
-                          // Handle New User Registration text click
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUpActivity(),
+                              ));
                         },
                         child: const Text(
                           'New user? Register Now',
@@ -216,18 +225,65 @@ class _SignInActivityState extends State<SignInActivity> {
   }
 
   Future<void> emailLogin(BuildContext context) async {
-    if(_provider.mobileLogin){
-      var login = _provider.emailLogin(context);
-      if (await login) {
-        Navigator.push(
+    if (_provider.mobileLogin) {
+      // var status = await _provider.emailLogin();
+      // if (status != 0) {
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Dashboard(),
+              builder: (context) => const Dashboard(),
             ));
-      }
-    }else{
-      var login = _provider.sendOtp(context);
-
+      // }
+    } else {
+      // if (_provider.mobileController.text.length != 10) {//{"status": 0, "msg": "Invalid User"}
+      //   if (_provider.sendOtp() == 1) {
+      TextEditingController otpController = TextEditingController();
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Center(child: Text("OTP")),
+          content: TextFormField(
+            controller: otpController,
+            decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFEE4B2B))),
+              hintText: 'Enter OTP',
+              labelText: 'OTP',
+              alignLabelWithHint: true,
+            ),
+            keyboardType: TextInputType.number,
+            maxLength: 6,
+          ),
+          actions: [
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // emailLogin(context);
+                  // if (_provider.login?.otp == otpController.text) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Dashboard(),
+                        ));
+                  // }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFEE4B2B),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(27.0),
+                  ),
+                ),
+                child: const Text(
+                  "Verify OTP",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+      // }
+      // }
     }
   }
 

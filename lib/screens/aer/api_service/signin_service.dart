@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:first/screens/aer/api_constants/api_list.dart';
 import 'package:first/screens/aer/models/login.dart';
+import 'package:flutter/foundation.dart';
 import '../../../models/album_model.dart';
 import 'package:http/http.dart' as http;//The method 'post' was called on null.
 
@@ -38,16 +39,17 @@ class SignInService {
         },
       );
 
-      print("Response body: ${response.body}");
       if (response.statusCode == 200) {
         return LoginUser.fromJson(jsonDecode(response.body));
       } else {
-        print("LoginUser failed with status code: ${response.statusCode}");
         return null;
       }
     } catch (e) {
-      print("Error during login: $e");
+      if (kDebugMode) {
+        print("Error during login: $e");
+      }
     }
+    return null;
   }
 
   Future<LoginUser?> sendOtp(String mobile) async {
@@ -70,15 +72,22 @@ class SignInService {
         },
       );
 
-      print("Response body: ${response.body}");
+      if (kDebugMode) {
+        print("Response body: ${response.body}");
+      }
       if (response.statusCode == 200) {
         return LoginUser.fromJson(jsonDecode(response.body));
       } else {
-        print("LoginUser failed with status code: ${response.statusCode}");
+        if (kDebugMode) {
+          print("LoginUser failed with status code: ${response.statusCode}");
+        }
         return null;
       }
     } catch (e) {
-      print("Error during login: $e");
+      if (kDebugMode) {
+        print("Error during login: $e");
+      }
     }
+    return null;
   }
 }

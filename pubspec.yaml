@@ -42,6 +42,7 @@ dependencies:
   firebase_core: ^2.16.0
   flutter_rating_bar: ^4.0.1
   connectivity_plus: ^5.0.0
+#  flutter_exit_app: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,6 +71,12 @@ flutter:
     - assets/images/aer/images/img_logo.png
     - assets/images/aer/images/img_noconnection.png
     - assets/images/aer/images/img_signin.png
+    - assets/images/aer/images/img_signup.png
+    - assets/images/aer/images/ic_onboard.png
+    - assets/images/aer/images/ic_payment1.png
+    - assets/images/aer/images/ic_adduser.png
+    - assets/images/aer/images/ic_mylead.png
+    - assets/images/aer/images/ic_add_lead.png
   #     - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

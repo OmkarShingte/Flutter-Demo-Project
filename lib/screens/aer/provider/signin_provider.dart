@@ -25,43 +25,19 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> emailLogin(BuildContext context) async {
+  Future<int?> emailLogin() async {
     _login = null;
     final response = await SignInService()
         .emailLogin(emailIdController.text, passwordController.text);
     _login = response!;
     print("object  ${_login?.status}");
     notifyListeners();
-    if (_login?.status != 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return _login?.status;
   }
 
-  sendOtp(BuildContext context) async {
-    if (mobileController.text.length != 10) {
-      final response = await SignInService().sendOtp(mobileController.text);
-      // if (response?.status == 1) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Center(child: Text("OTP")),
-          content: TextFormField(
-            decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFEE4B2B))),
-              hintText: 'Enter OTP',
-              labelText: 'OTP',
-              alignLabelWithHint: true,
-              counterText: '',
-            ),
-            keyboardType: TextInputType.number,
-            maxLength: 6,
-          ),
-        ),
-      );
-      // }
-    }
+  Future<int?> sendOtp() async {
+    final response = await SignInService().sendOtp(mobileController.text);
+    _login = response!;
+    return response.status;
   }
 }
