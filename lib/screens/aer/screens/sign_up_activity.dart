@@ -1,6 +1,42 @@
 import 'package:first/screens/aer/screens/signIn_activity.dart';
 import 'package:flutter/material.dart';
 
+// class SignUpActivity extends StatefulWidget {
+//   final Function onTapCAllback;
+//   final String tapText;
+//
+//   const SignUpActivity(
+//       {Key? key, required this.onTapCAllback, required this.tapText})
+//       : super(key: key);
+//
+//   @override
+//   State<SignUpActivity> createState() => _SignUpActivityState();
+// }
+//
+// class _SignUpActivityState extends State<SignUpActivity> {
+//   bool _wasTapped = false;
+//   String _displayText = "";
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: GestureDetector(
+//         onTap: (){
+//           if(!_wasTapped){
+//             widget.onTapCAllback();
+//           }
+//           setState(() {
+//             _wasTapped = true;
+//             _displayText = "Voted";
+//           });
+//         },
+//         child: Text("Vote for $_displayText"),
+//
+//       ),
+//     );
+//   }
+// }
+
 class SignUpActivity extends StatefulWidget {
   const SignUpActivity({super.key});
 

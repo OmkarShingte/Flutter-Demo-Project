@@ -186,7 +186,7 @@ class _SignInActivityState extends State<SignInActivity> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SignUpActivity(),
+                                builder: (context) => SignUpActivity(),
                               ));
                         },
                         child: const Text(

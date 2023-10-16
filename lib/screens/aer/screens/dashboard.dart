@@ -14,7 +14,16 @@ class _DashboardState extends State<Dashboard> {
       // drawer: Drawer(
       //   child: Text("Text",style: TextStyle(color: Colors.white),),
       // ),
-
+        bottomNavigationBar:  Container(
+          height: 100,
+          padding: const EdgeInsets.all(8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50.0),
+            child: Container(
+              color: Colors.teal.withOpacity(0.1),
+            ),
+          ),
+        ),
       appBar: AppBar(
         title: const Text('Homepage'),
         actions: <Widget>[

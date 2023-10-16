@@ -26,7 +26,7 @@ class IntroductionActivity extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignUpActivity(),
+                            builder: (context) => SignUpActivity(),
                           ));
                     },
                     style: ElevatedButton.styleFrom(
