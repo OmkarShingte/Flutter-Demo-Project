@@ -1,7 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:first/provider/counter_provider.dart';
 import 'package:first/provider/looking_for_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
 import 'package:first/screens/aer/screens/splash.dart';
+import 'package:first/screens/camera_screenshot_example.dart';
 import 'package:first/screens/future_builder_example.dart';
 import 'package:first/screens/listtile_app.dart';
 import 'package:first/screens/looking_for_screen.dart';
@@ -173,6 +175,26 @@ class _MainScreenState extends State<MainScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      WidgetsFlutterBinding.ensureInitialized();
+                      final cameras = await availableCameras();
+                      final firstCamera = cameras.first;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CameraScreenshotExample(camera: firstCamera),
+                        ));
+                    },
+                    child: Text(
+                      "Camera Screenshot Example",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
@@ -436,21 +458,6 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: 250,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const YoutubeScreen(),
-                        )),
-                    child: Text(
-                      "Tab Bar Example",
-                      style: customTextStyle(),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
