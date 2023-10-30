@@ -9,6 +9,8 @@ import 'package:first/screens/page_one.dart';
 import 'package:first/screens/splash_screen.dart';
 import 'package:first/screens/login_screen.dart';
 import 'package:first/screens/student_app.dart';
+import 'package:first/screens/tab_bar_example.dart';
+import 'package:first/screens/tab_swipe.dart';
 import 'package:first/screens/youtube_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,9 +71,6 @@ class _MainScreenState extends State<MainScreen> {
     // var data = Item("", counterProviderFunction(context));
     return Scaffold(
         drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
           child: ListView(
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
@@ -89,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
                   // Update the state of the app
                   _onItemTapped(0);
                   // Then close the drawer
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -165,271 +164,309 @@ class _MainScreenState extends State<MainScreen> {
 
   LayoutBuilder homeScreen(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) =>
-          SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => StudentApp(),));
-                        },
-                        child: Text(
-                          "Student App",
-                          style: customTextStyle(),
-                        ),
-                      ),
+      builder: (context, constraints) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: constraints.maxHeight,
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TabBarExample(),
+                        )),
+                    child: Text(
+                      "Tab Bar Example",
+                      style: customTextStyle(),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ChangeNotifierProvider(
-                                          create: (context) =>
-                                              NetworkCallModel(),
-                                          child: const NetworkCallProvider()),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                            "Network Call",
-                            style: customTextStyle(),
-                          )),
-                    ),
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 10),
-                    //   width: 250,
-                    //   child: ElevatedButton(
-                    //     onPressed: () =>
-                    //         Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //               builder: (context) => AerApp(),
-                    //             )),
-                    //     child: Text(
-                    //       "AER App",
-                    //       style: customTextStyle(),
-                    //     ),
-                    //   ),
-                    // ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            counterProviderFunction(context);
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                            "Counter with provider",
-                            style: customTextStyle(),
-                          )),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                              "Login screen NM", style: customTextStyle())),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DataList(),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text("Data List", style: customTextStyle())),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SplashScreen(),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                              "Splash Screen", style: customTextStyle())),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                  const Operations(title: 'Flutter Home Page'),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text("Operations", style: customTextStyle())),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const NetworkCall(),
-                                ));
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                            "Simple Network call",
-                            style: customTextStyle(),
-                          )),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              //goRoute
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangeNotifierProvider(
-                                          create: (context) =>
-                                              LookingForProvider(),
-                                          child: const LookingForScreen(),
-                                        )));
-                          },
-                          style: customButtonStyle(),
-                          child: Text(
-                            "Looking for Numbers",
-                            style: customTextStyle(),
-                          )),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PageOne(),
-                              ));
-                        },
-                        style: customButtonStyle(),
-                        child: Text(
-                          "Page one",
-                          style: customTextStyle(),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ListTileApp(),
-                              ));
-                        },
-                        style: customButtonStyle(),
-                        child: Text(
-                          "ListTile Animation",
-                          style: customTextStyle(),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (
-                                      context) => const FutureBuilderExample(),
-                                )),
-                        child: Text(
-                          "Future Builder Example",
-                          style: customTextStyle(),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (
-                                      context) => const YoutubeScreen(),
-                                )),
-                        child: Text(
-                          "Youtube Player",
-                          style: customTextStyle(),
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TabSwipe(),
+                          ));
+                    },
+                    child: Text(
+                      "Tab bar TabSwipe",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StudentApp(),
+                          ));
+                    },
+                    child: Text(
+                      "Student App",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => NetworkCallModel(),
+                                  child: const NetworkCallProvider()),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text(
+                        "Network Call",
+                        style: customTextStyle(),
+                      )),
+                ),
+                // Container(
+                //   margin: const EdgeInsets.only(bottom: 10),
+                //   width: 250,
+                //   child: ElevatedButton(
+                //     onPressed: () =>
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //               builder: (context) => AerApp(),
+                //             )),
+                //     child: Text(
+                //       "AER App",
+                //       style: customTextStyle(),
+                //     ),
+                //   ),
+                // ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        counterProviderFunction(context);
+                      },
+                      style: customButtonStyle(),
+                      child: Text(
+                        "Counter with provider",
+                        style: customTextStyle(),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text("Login screen NM", style: customTextStyle())),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DataList(),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text("Data List", style: customTextStyle())),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SplashScreen(),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text("Splash Screen", style: customTextStyle())),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const Operations(title: 'Flutter Home Page'),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text("Operations", style: customTextStyle())),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NetworkCall(),
+                            ));
+                      },
+                      style: customButtonStyle(),
+                      child: Text(
+                        "Simple Network call",
+                        style: customTextStyle(),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            //goRoute
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChangeNotifierProvider(
+                                      create: (context) => LookingForProvider(),
+                                      child: const LookingForScreen(),
+                                    )));
+                      },
+                      style: customButtonStyle(),
+                      child: Text(
+                        "Looking for Numbers",
+                        style: customTextStyle(),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PageOne(),
+                          ));
+                    },
+                    style: customButtonStyle(),
+                    child: Text(
+                      "Page one",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ListTileApp(),
+                          ));
+                    },
+                    style: customButtonStyle(),
+                    child: Text(
+                      "ListTile Animation",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FutureBuilderExample(),
+                        )),
+                    child: Text(
+                      "Future Builder Example",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const YoutubeScreen(),
+                        )),
+                    child: Text(
+                      "Youtube Player",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const YoutubeScreen(),
+                        )),
+                    child: Text(
+                      "Tab Bar Example",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
+        ),
+      ),
     );
   }
 
   void counterProviderFunction(BuildContext context) {
     Navigator.push(
-      //goRoute
+        //goRoute
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              ChangeNotifierProvider(
-                  create: (context) => CounterModel(),
-                  child: const CounterWithProviderScreen()),
+          builder: (context) => ChangeNotifierProvider(
+              create: (context) => CounterModel(),
+              child: const CounterWithProviderScreen()),
         ));
   }
 
