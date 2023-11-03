@@ -1,14 +1,16 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:camera/camera.dart';
-import 'package:first/screens/aatma/widgets/custom_toast.dart';
+import 'package:first/screens/aer/screens/image_path_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image/image.dart' as img;
+import 'package:geolocator/geolocator.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
+import '../common/geocoding_common_function.dart';
+import '../provider/monitoring_provider.dart';
+import 'package:intl/intl.dart';
 
 class CameraScreenshotExample extends StatefulWidget {
   const CameraScreenshotExample({
@@ -23,121 +25,226 @@ class CameraScreenshotExample extends StatefulWidget {
 }
 
 class CameraScreenshotState extends State<CameraScreenshotExample> {
-  late CameraController _controller;
+  late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
-  final _ssController = ScreenshotController();
+  final _screenshotController = ScreenshotController();
+  var latitude = 0.0;
+  var longitude = 0.0;
+  String address = "";
 
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(
+    _cameraController = CameraController(
       widget.camera,
       ResolutionPreset.medium,
     );
-    _initializeControllerFuture = _controller.initialize();
+    _initializeControllerFuture = _cameraController.initialize();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _cameraController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    getLocation();
     return Scaffold(
-      backgroundColor: Colors.green,
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Container(
-              child: CameraWidget(),
-              color: Colors.grey.shade200,
-              padding: EdgeInsets.all(2),
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+      backgroundColor: Colors.grey,
+      body: ChangeNotifierProvider(
+        create: (context) => MonitoringProvider(),
+        child: Consumer<MonitoringProvider>(
+          builder: (context, zzz, child) => FutureBuilder<void>(
+            future: _initializeControllerFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(
+                  children: [
+                    Expanded(child: cameraOrPhoto(provider: zzz)),
+                    Container(
+                      color: Colors.black,
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      child:
+                          captureOrRecapture(context: context, provider: zzz),
+                    )
+                  ],
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
       ),
     );
   }
 
-  Widget CameraWidget() => Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 100),
-            child: Stack(
-              children: [
-                Container(
-                  child: CameraPreview(_controller),
-                  height: double.maxFinite,
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-                    color: Color.fromRGBO(50, 50, 50, 0.5),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/logo.png',
-                          width: 80,
-                          height: 80,
+  Widget cameraOrPhoto({required MonitoringProvider provider}) =>
+      provider.isCamera
+          ? CustomCameraWidget()
+          : Image.memory(
+              fit: BoxFit.fill,
+              provider.imageUnit,
+              width: double.infinity,
+            );
+
+  Widget captureOrRecapture(
+      {required BuildContext context, required MonitoringProvider provider}) {
+    return provider.isCamera
+        ? Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: provider.isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : GestureDetector(
+                        child: Icon(
+                          Icons.camera_sharp,
+                          color: Colors.white,
+                          size: 50,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Pune, Maharashtra, India",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
-                            ),
-                            Text(
-                                "Yash classic, Pashan, \nPune, Maharashtra, 411021, India",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12)),
-                            Text("Lat 18.4323239",
-                                style: TextStyle(color: Colors.white)),
-                            Text("Long 75.23653467",
-                                style: TextStyle(color: Colors.white)),
-                            Text("30/10/23 12.55 PM GMT +05:30",
-                                style: TextStyle(color: Colors.white)),
-                          ],
-                        )
-                      ],
-                    ),
+                        onTap: () async {
+                          provider.isLoading = true;
+                          provider.imageUnit =
+                              await _screenshotController.captureFromWidget(
+                                  cameraOrPhoto(provider: provider));
+                          if (provider.imageUnit == null) return;
+                          provider.isLoading = false;
+                          provider.isCamera = false;
+                        },
+                      ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 50,
                   ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
+              ),
+            ],
+          )
+        : Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                    onTap: () {
+                      provider
+                          .uploadImage(imagePath: provider.imageUnit)
+                          .then((value) {
+                        if (value) {
+                          // ShowMessage.show("Image Uploaded Successfully",
+                          //     bgColor: AppColors().successBGColor);
+                          saveImage(provider.imageUnit);
+                          // Navigator.pop(context);
+                        }
+                      });
+                    }),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                  onTap: () {
+                    provider.isCamera = true;
+                  },
+                ),
+              ),
+            ],
+          );
+  }
+
+  Widget CustomCameraWidget() {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    String formattedTime = DateFormat('HH:mm:ss').format(now);
+    String formattedTimeZone = now.timeZoneName;
+    // final pref = locator<Preferences>();
+    return Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          child: CameraPreview(_cameraController),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.only(left: 10),
+            margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+            color: Color.fromRGBO(50, 50, 50, 0.5),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImagePath.mapImage,
+                  width: 80,
+                  height: 80,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("userName!", style: textStyle(14)),
+                      Container(
+                        width: 200,
+                        child: Text(address, style: textStyle(12)),
+                      ),
+                      Text("Lat : $latitude", style: textStyle(12)),
+                      Text("Long : $longitude", style: textStyle(12)),
+                      Text("$formattedTimeZone $formattedTime $formattedDate",
+                          style: textStyle(12)),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 30),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: FloatingActionButton(
-                onPressed: () async {
-                  final image =
-                      await _ssController.captureFromWidget(CameraWidget());
-                  if (image == null) return;
-                  var path = await saveImage(image);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            DisplayPictureScreen(imagePath: path),
-                      ));
-                },
-                child: const Icon(Icons.camera_alt),
-              ),
-            ),
-          )
-        ],
-      );
+        )
+      ],
+    );
+  }
+
+  TextStyle textStyle(double size) =>
+      TextStyle(color: Colors.white, fontSize: size);
+
+  void getLocation() async {
+    await [
+      Permission.location,
+      Permission.locationAlways,
+      Permission.locationWhenInUse
+    ].request();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+    var tempAddress = await CommonGeoCoding()
+        .convertInAddress(lat: position.latitude, lng: position.longitude);
+    setState(() {
+      latitude = position.latitude;
+      longitude = position.longitude;
+      address = tempAddress;
+    });
+  }
 
   saveImage(Uint8List image) async {
     await [Permission.storage].request();
@@ -149,25 +256,5 @@ class CameraScreenshotState extends State<CameraScreenshotExample> {
     final result = await ImageGallerySaver.saveImage(image, name: name);
     return image;
   }
-}
 
-class DisplayPictureScreen extends StatelessWidget {
-  final Uint8List imagePath;
-
-  const DisplayPictureScreen({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    CustomToast().customToast("Image Saved Successfully");
-    return Scaffold(
-        appBar: AppBar(title: const Text('Display the Picture')),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: Stack(
-            children: [
-              Image.memory(imagePath),
-            ],
-          ),
-        ));
-  }
 }

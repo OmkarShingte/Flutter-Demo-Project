@@ -18,4 +18,5 @@ class ImagePath {
   static const String notificationDashboard = "assets/images/notification_dashboard.png";
   static const String dashboardLogo = "assets/images/dashboard_logo.png";
   static const String logoutDashboard = "assets/images/logout_dashboard.png";
+  static const String mapImage = "assets/images/img_map.png";
 }
