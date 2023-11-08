@@ -4,6 +4,9 @@ import 'package:first/provider/looking_for_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
 import 'package:first/screens/aer/screens/splash.dart';
 import 'package:first/screens/camera_screenshot_example.dart';
+import 'package:first/screens/db_example/model/db_model.dart';
+import 'package:first/screens/db_example/provider/db_provider.dart';
+import 'package:first/screens/db_example/screen/db_example_screen.dart';
 import 'package:first/screens/future_builder_example.dart';
 import 'package:first/screens/listtile_app.dart';
 import 'package:first/screens/looking_for_screen.dart';
@@ -150,6 +153,27 @@ class _MainScreenState extends State<MainScreen> {
                   fontSize: 24,
                   fontWeight: FontWeight.bold),
             )),
+        // AppBar(
+        //   actions: [
+        //     Padding(
+        //       padding: EdgeInsets.symmetric(horizontal: 16),
+        //       child: GestureDetector(
+        //           onTap: () {
+        //             setState(() {
+        //               isReadOnly = !isReadOnly;
+        //               editCancelIcon =
+        //               isReadOnly ? Icon(Icons.edit) : Icon(Icons.close);
+        //               if (isReadOnly) {
+        //                 setData();
+        //               }
+        //             });
+        //           },
+        //           child: editCancelIcon),
+        //     ),
+        //   ],
+        //   title:
+        //   Text(AppLocalizations.of(context)!.titleSugarCanePlantationForm),
+        // )
         body: <Widget>[
           homeScreen(context),
           Container(
@@ -175,6 +199,25 @@ class _MainScreenState extends State<MainScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                          MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                                create: (context) => DbProvider(),
+                                child: const DbExampleScreen()),
+                          ));
+                    },
+                    child: Text(
+                      "Db Example",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
                   width: 250,
