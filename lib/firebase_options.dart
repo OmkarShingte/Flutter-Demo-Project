@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA-FKzQM_eq01jGz9cqXRMBIMeWOIuvkvI',
-    appId: '1:83929607850:web:5334f9d3ac5608b5b92ad3',
-    messagingSenderId: '83929607850',
-    projectId: 'flutterapp-71cf3',
-    authDomain: 'flutterapp-71cf3.firebaseapp.com',
-    storageBucket: 'flutterapp-71cf3.appspot.com',
-    measurementId: 'G-W54388F5TK',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBhc489A81JC6He5O0CegfotyAEmx1bKBI',
     appId: '1:83929607850:android:4e84d6d42b34e06fb92ad3',
@@ -68,14 +64,5 @@ class DefaultFirebaseOptions {
     projectId: 'flutterapp-71cf3',
     storageBucket: 'flutterapp-71cf3.appspot.com',
     iosBundleId: 'com.example.first',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAxF18Yod-Shb_Fs2jM2atirPrOwRD7L8Y',
-    appId: '1:83929607850:ios:6c89fb6c1ed46557b92ad3',
-    messagingSenderId: '83929607850',
-    projectId: 'flutterapp-71cf3',
-    storageBucket: 'flutterapp-71cf3.appspot.com',
-    iosBundleId: 'com.example.first.RunnerTests',
   );
 }

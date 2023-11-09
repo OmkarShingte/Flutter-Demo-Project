@@ -1,4 +1,9 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:first/bre_crew/model/user.dart';
+import 'package:first/bre_crew/screens/wrapper.dart';
+import 'package:first/bre_crew/services/auth.dart';
+import 'package:first/firebase_options.dart';
 import 'package:first/provider/counter_provider.dart';
 import 'package:first/provider/looking_for_provider.dart';
 import 'package:first/provider/network_call_provider.dart';
@@ -25,7 +30,9 @@ import 'screens/network_call_screen.dart';
 import 'screens/network_call_provider_screen.dart';
 import 'screens/operations_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -205,7 +212,27 @@ class _MainScreenState extends State<MainScreen> {
                   child: ElevatedButton(
                     onPressed: () async {
                       Navigator.push(
-                        context,
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StreamProvider<UserUid?>.value(
+                                initialData: UserUid(uid: "uid"),
+                                value: AuthService().user,
+                                child: Wrapper()),
+                          ));
+                    },
+                    child: Text(
+                      "Brew Crew App",
+                      style: customTextStyle(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                          context,
                           MaterialPageRoute(
                             builder: (context) => ChangeNotifierProvider(
                                 create: (context) => DbProvider(),
@@ -227,10 +254,11 @@ class _MainScreenState extends State<MainScreen> {
                       final cameras = await availableCameras();
                       final firstCamera = cameras.first;
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CameraScreenshotExample(camera: firstCamera),
-                        ));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                CameraScreenshotExample(camera: firstCamera),
+                          ));
                     },
                     child: Text(
                       "Camera Screenshot Example",

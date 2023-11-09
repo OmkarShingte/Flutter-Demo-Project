@@ -55,6 +55,11 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   geocoding: ^2.0.5
   intl:
+  sqflite:
+  firebase_crashlytics: ^3.4.3
+  firebase_auth: ^4.12.1
+  cloud_firestore: ^4.12.2
+
 #  flutter_exit_app: ^1.1.2
 dev_dependencies:
   flutter_test:
